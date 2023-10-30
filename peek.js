@@ -57,16 +57,16 @@ class peek {
         // Peek Item TPL
         var peekitemid = generatePeekID(6),
             peektpl = '<div class="peek-item peek-' + type + '" id="' + peekitemid + '">' +
-            '        <div class="peek-wrapper">' +
-            '            <div class="peek-title">' + title + '</div>' +
-            '            <div class="peek-content">' + content + '</div>' +
-            '            <div class="peek-icon"></div>' +
-            '            <div class="peek-progress">' +
-            '               <div class="peek-bar"></div>' +
-            '           </div>' +
-            '            <a href="javascript:;" class="peek-close" title="Kapat" onclick="closePeekItem(\'' + peekitemid + '\')"><span>Kapat</span></a>' +
-            '        </div>' +
-            '       </div>';
+            '<div class="peek-wrapper">' +
+            '    <div class="peek-title">' + title + '</div>' +
+            '    <div class="peek-content">' + content + '</div>' +
+            '    <div class="peek-icon"></div>' +
+            '    <div class="peek-progress">' +
+            '       <div class="peek-bar"></div>' +
+            '   </div>' +
+            '    <a href="javascript:;" class="peek-close" title="Kapat" onclick="closePeekItem(\'' + peekitemid + '\')"><span>Kapat</span></a>' +
+            '   </div>' +
+            '</div>';
 
         if(peekconfig.multiple) {
 
@@ -114,7 +114,7 @@ class peek {
 
             }
             else {
-                peekitem.classList.add("peek-noprogressbar");
+                peekNoProgressBar(peekitem);
             }
 
             setTimeout(function (){
@@ -123,7 +123,7 @@ class peek {
 
         }
         else {
-            peekitem.classList.add("peek-noprogressbar");
+            peekNoProgressBar(peekitem);
         }
 
         setTimeout(function (){
@@ -172,4 +172,10 @@ function closePeekItem(id) {
         }
     }
 
+}
+
+/* Peek No Progressbar */
+function peekNoProgressBar(peekitem) {
+    peekitem.classList.add("peek-border");
+    peekitem.classList.add("peek-noprogressbar");
 }

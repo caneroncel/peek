@@ -78,10 +78,10 @@
 
   /* Item */
   .peek-item {
-    margin-bottom: 10px;
     cursor: default;
     transition: .3s ease-in-out;
     opacity: 0;
+    margin-bottom: 15px;
     transform: scale(0);
 
     &.peek-active {
@@ -96,10 +96,6 @@
         }
       }
 
-    }
-
-    @media screen and (min-width: 425px) {
-      margin-top: 10px;
     }
 
     .peek-wrapper {
@@ -184,6 +180,13 @@
 
     }
 
+    /* Left Border */
+    &.peek-border {
+      .peek-wrapper {
+        border-left: 8px solid var(--peek-blue);
+      }
+    }
+
     /* No Progressbar */
     &.peek-noprogressbar {
 
@@ -200,6 +203,7 @@
     /* Success */
     &.peek-success {
       .peek-wrapper {
+        border-color: var(--peek-green);
 
         .peek-progress {
           .peek-bar {
@@ -218,6 +222,7 @@
     /* Warning */
     &.peek-warning {
       .peek-wrapper {
+        border-color: var(--peek-yellow);
 
         .peek-progress {
           .peek-bar {
@@ -236,6 +241,7 @@
     /* Error */
     &.peek-error {
       .peek-wrapper {
+        border-color: var(--peek-red);
 
         .peek-progress {
           .peek-bar {

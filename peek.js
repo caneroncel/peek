@@ -159,17 +159,17 @@ function closePeekItem(id) {
         peekitem.classList.remove("peek-active");
 
         setTimeout(function (){
+
             peekitem.remove();
+
+            if (peekdiv.hasChildNodes()) {
+                // console.log('Div has child or children');
+            } else {
+                peekdiv.remove();
+            }
+
         }, 300);
 
-    }
-
-    if(peekdiv !== null) {
-        if (peekdiv.hasChildNodes()) {
-            // console.log('Div has child or children');
-        } else {
-            peekdiv.remove();
-        }
     }
 
 }

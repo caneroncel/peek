@@ -9,16 +9,15 @@
     peek.warning("Uyarı", "İşlem sırasında bir hata meydana geldi");
     peek.error("Hata", "İşlem başarısız!");
 
-    Parametreler:
+    Parameters:
     title, content, timer (MS / false), progressbar (true / false)
 */
 
 window.peekconfig = {
-    "type"        : "info",
     "multiple"    : true,
     "maxitem"     : 5,
-    "progressbar" : true,
-    "timeout"     : 5000,       // MS or false
+    "progressbar" : true,       // true, false (Optional)
+    "timeout"     : 6000,       // MS or false (Optional)
     "position" : {
         "vertical"   : "top",   // top, middle, bottom
         "horizontal" : "center",  // left, center, right
@@ -28,27 +27,26 @@ window.peekconfig = {
 /* Create Peek*/
 class peek {
 
-    static info(title, content, timer, progressbar) {
-        this.createPeek("info", title, content, timer, progressbar);
+    static info(title, content, timeout, progressbar) {
+        this.createPeek("info", title, content, timeout, progressbar);
     }
 
-    static success(title, content, timer, progressbar) {
-        this.createPeek("success", title, content, timer, progressbar);
+    static success(title, content, timeout, progressbar) {
+        this.createPeek("success", title, content, timeout, progressbar);
     }
 
-    static warning(title, content, timer, progressbar) {
-        this.createPeek("warning", title, content, timer, progressbar);
+    static warning(title, content, timeout, progressbar) {
+        this.createPeek("warning", title, content, timeout, progressbar);
     }
 
-    static error(title, content, timer, progressbar) {
-        this.createPeek("error", title, content, timer, progressbar);
+    static error(title, content, timeout, progressbar) {
+        this.createPeek("error", title, content, timeout, progressbar);
     }
 
     /* Create Peek */
-    static createPeek(type = "info", title, content, timer, progressbar = true) {
-        // console.log(`Type: ${type}\nTitle: ${title}\nContent: ${content}\nTimer: ${timer}\nTimer: ${progressbar}`);
+    static createPeek(type, title, content, timeout, progressbar = true) {
 
-        // Check #peek
+        // Create #peek Container
         if(document.getElementById("peek") === null) {
             var peekcontainer = '<div id="peek" class="peek-'+ peekconfig.position.vertical +' peek-'+ peekconfig.position.horizontal +'">' + '</div>';
             document.body.insertAdjacentHTML("beforeend", peekcontainer);
@@ -56,25 +54,9 @@ class peek {
 
         var peekdiv = document.getElementById("peek");
 
-        // Timeout
-        if(typeof timer === "undefined") {
-            timer = peekconfig.timeout;
-        }
-
-        // Progressbar
-        var noprogressbar = "";
-
-        if(peekconfig.progressbar === false || progressbar === false) {
-            noprogressbar = "peek-noprogressbar";
-        }
-
-        if(progressbar === true) {
-            noprogressbar = "";
-        }
-
-        // TPL
+        // Peek Item TPL
         var peekitemid = generatePeekID(6),
-            peektpl = '<div class="peek-item ' + noprogressbar + ' peek-' + type + '" id="' + peekitemid + '">' +
+            peektpl = '<div class="peek-item peek-' + type + '" id="' + peekitemid + '">' +
             '        <div class="peek-wrapper">' +
             '            <div class="peek-title">' + title + '</div>' +
             '            <div class="peek-content">' + content + '</div>' +
@@ -103,38 +85,49 @@ class peek {
             peekdiv.innerHTML = peektpl;
         }
 
-        if(peekconfig.timeout !== false) {
+        var peekitem = document.getElementById(peekitemid);
 
-            // Progress Bars
-            if(progressbar === true) {
-                var peekbars = peekdiv.querySelectorAll(".peek-bar");
+        if(typeof timeout === "undefined") {
+            if(peekconfig.timeout === false) {
+                timeout = false;
+            }
+            else {
+                timeout = peekconfig.timeout;
+            }
+        }
 
-                peekbars.forEach(function (item, index) {
+        if(timeout !== false) {
 
-                    if (item.classList.contains("working") === false) {
-
-                        item.classList.add("working");
-
-                        item.style.transition = "all " + (timer / 1000) + "s linear";
-
-                        setTimeout(function () {
-                            item.style.width = '0%';
-                        }, 100);
-
-                    }
-
-                });
+            // Progress Bar
+            if(typeof progressbar === "undefined") {
+                progressbar = peekconfig.progressbar !== false;
             }
 
-            // Timeout
+            if(progressbar !== false) {
+
+                var peekbar = peekitem.querySelector(".peek-bar");
+                peekbar.style.transition = "all " + (timeout / 1000) + "s linear";
+
+                setTimeout(function () {
+                    peekbar.style.width = '0%';
+                }, 100);
+
+            }
+            else {
+                peekitem.classList.add("peek-noprogressbar");
+            }
+
             setTimeout(function (){
                 closePeekItem(peekitemid);
-            }, timer+100);
+            }, timeout + 100);
 
+        }
+        else {
+            peekitem.classList.add("peek-noprogressbar");
         }
 
         setTimeout(function (){
-            document.getElementById(peekitemid).classList.add("peek-active");
+            peekitem.classList.add("peek-active");
         },100);
 
     }

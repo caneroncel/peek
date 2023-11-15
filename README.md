@@ -1,7 +1,6 @@
 # peek
 Peek JS Toast Notification
 
-
     Peek JS Toast Notification
     Author: Caner Oncel (@caneroncel)
     https://github.com/caneroncel/peek

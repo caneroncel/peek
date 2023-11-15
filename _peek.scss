@@ -18,6 +18,12 @@
 @mixin peek-dark-colors {
   --peek-text: rgba(255, 255, 255, 1);
   --peek-surface: rgba(0, 0, 0, 1);
+  --peek-white: #FFF;
+  --peek-soft-grey: #DDD;
+  --peek-green: #31BC36;
+  --peek-red: #FF355B;
+  --peek-blue: #2E86E8;
+  --peek-yellow: #FFC223;
 }
 
 /* Light mode */

@@ -1,0 +1,34 @@
+{
+  "name": "peek",
+  "version": "1.0.0",
+  "author": "Caner Öncel",
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "start": "sass _peek.scss peek.min.css --style compressed"
+  },
+  "description": "Peek JS Toast Notification",
+  "main": "peek.min.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caneroncel/peek.git"
+  },
+  "keywords": [
+    "peek",
+    "toast",
+    "notification",
+    "notify"
+  ],
+  "bugs": {
+    "url": "https://github.com/caneroncel/peek/issues"
+  },
+  "homepage": "https://github.com/caneroncel/peek#readme",
+  "dependencies": {
+    "gulp-concat": "^2.6.1",
+    "gulp-header-comment": "^0.10.0",
+    "gulp-strip-comments": "^2.6.0",
+    "gulp-terser": "^2.1.0"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
+}

@@ -27,6 +27,12 @@ window.peekconfig = {
 /* Create Peek*/
 class peek {
 
+    static clear() {
+        if(document.getElementById("peek") !== null) {
+            document.getElementById("peek").remove();
+        }
+    }
+
     static info(title, content, timeout, progressbar) {
         this.createPeek("info", title, content, timeout, progressbar);
     }
